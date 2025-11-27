@@ -1,21 +1,23 @@
 # ESP32-S3 High-Speed Traditional Chinese LED Matrix
 
-## 1. Project Overview
-This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chinese text at high frame rates (120FPS+).
-It uses **Pre-Rendering** (drawing text to memory first) to eliminate flickering and lag.
+## 1\. Project Overview
 
-## 2. Hardware Bill of Materials
-* **Microcontroller:** Espressif **ESP32-S3-DevKitC-1U-N8R8**
-    * **Flash:** 8MB (Quad SPI)
-    * **PSRAM:** 8MB (Octal SPI) - *REQUIRED for this code.*
-    * *Note:* The "1U" model requires an external WiFi antenna.
-* **Display:** Waveshare **RGB-Matrix-P3-64x64**
-    * **Driver IC:** SM16208 or SM5166 (High Refresh Rate).
-    * **Interface:** HUB75.
-* **Power Supply:** 5V 4A (or higher) DC Adapter.
-    * *Connect 5V directly to the panel's power header, not through the ESP32.*
+This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chinese text at high frame rates (120FPS+). It uses **Pre-Rendering** (drawing text to memory first) to eliminate flickering and lag.
 
-## 3. Wiring Guide (ESP32-S3 to HUB75)
+## 2\. Hardware Bill of Materials
+
+  * **Microcontroller:** Espressif **ESP32-S3-DevKitC-1U-N8R8**
+      * **Flash:** 8MB (Quad SPI)
+      * **PSRAM:** 8MB (Octal SPI) - *REQUIRED for this code.*
+      * *Note:* The "1U" model requires an external WiFi antenna.
+  * **Display:** Waveshare **RGB-Matrix-P3-64x64**
+      * **Driver IC:** SM16208 or SM5166 (High Refresh Rate).
+      * **Interface:** HUB75.
+  * **Power Supply:** 5V 4A (or higher) DC Adapter.
+      * *Connect 5V directly to the panel's power header, not through the ESP32.*
+
+## 3\. Wiring Guide (ESP32-S3 to HUB75)
+
 Direct connection (no level shifter needed for this specific board).
 
 | Matrix Pin | ESP32 Pin | Wire Color | Function |
@@ -36,10 +38,12 @@ Direct connection (no level shifter needed for this specific board).
 | **CLK** | 17 | Black | Clock Signal |
 | **GND** | GND | Black | **Common Ground (CRITICAL)** |
 
-## 4. Software Setup (PlatformIO)
+## 4\. Software Setup (PlatformIO)
 
 ### A. `platformio.ini` (Project Settings)
+
 You MUST use these settings to enable the 8MB Octal PSRAM.
+
 ```ini
 [env:esp32-s3-devkitc-1]
 platform = espressif32
@@ -68,7 +72,7 @@ build_flags =
     -D BOARD_HAS_PSRAM
 ```
 
-### B. partitions_custom.csv (Memory Map)
+### B. `partitions_custom.csv` (Memory Map)
 
 Create this file in the project root. It gives 5MB of storage for the Font File.
 
@@ -81,80 +85,55 @@ factory,  app,  factory, ,        0x200000,
 spiffs,   data, spiffs,  ,        0x500000,
 ```
 
+## 5\. Font System (Choosing & Flashing)
 
-## 5. Font System (Choosing & Flashing)
+The ESP32 reads `/font.ttf` from its internal storage. You have two choices:
 
-The ESP32 reads /font.ttf from its internal storage. 
+### Option A: High-Quality Vector Font (Recommended)
 
-You have two choices:
+  * **File:** `TaipeiSansTC-Subset.ttf` (\~3MB).
+      * (免費可商用字體 台北黑體 Taipei Sans TC [https://github.com/VdustR/taipei-sans-tc](https://github.com/VdustR/taipei-sans-tc))
+      * (Adobe 及 Google 推出思源黑體（Source Han Sans 或 Noto Sans CJK）後，思源黑體頓時佔據繁體中文世界的許多平面設計。然而許多人指出該製品 TC/TW 版的設計問題，甚至不適用於印刷。因此，翰字鑄造投入開源字型的改作，以思源黑體為基礎，讓繁體中文的使用者也能有適用於不同情境的印刷風格黑體。)
+  * **Pros:** Smooth curves, looks professional at large sizes (40px+).
+  * **Cons:** Requires "Subsetting" (removing unused characters) to fit in memory.
+  * **How to Generate:**
+    1.  Go to folder `1_subsetting fonts_ttf_to_ttf`.
+    2.  Run `generate_font.bat` (Requires Python & fonttools).
+    3.  It generates the subset based on `tw_edu_common_4808_chars.txt` and `basic_latin`.
 
-Option A: High-Quality Vector Font (Recommended)
+### Option B: Pixel Font (Alternative)
 
-- File: TaipeiSansTC-Subset.ttf (~3MB).
-  (免費可商用字體 台北黑體 Taipei Sans TC https://github.com/VdustR/taipei-sans-tc)
-  (Adobe 及 Google 推出思源黑體（Source Han Sans 或 Noto Sans CJK）後，思源黑體頓時佔據繁體中文世界的許多平面設計。然而許多人指出該製品 TC/TW 版的設計問題，甚至不適用於印刷。因此，翰字鑄造投入開源字型的改作，以思源黑體為基礎，讓繁體中文的使用者也能有適用於不同情境的印刷風格黑體。)
+  * **File:** `Cubic_11.ttf` (\~2.7MB).
+      * (免費開源的 11×11 中文點陣體 [https://github.com/ACh-K/Cubic-11](https://github.com/ACh-K/Cubic-11))
+  * **Pros:** No subsetting needed (file is naturally small). Sharp edges.
+  * **Cons:** Looks "blocky" or low-res.
+  * **How to use:** Just rename `Cubic_11.ttf` to `font.ttf`.
 
-- Pros: Smooth curves, looks professional at large sizes (40px+).
+### How to Flash the Font to ESP32
 
-- Cons: Requires "Subsetting" (removing unused characters) to fit in memory.
+1.  Rename your chosen `.ttf` file to `font.ttf`.
+2.  Place it inside the `data/` folder in your project.
+3.  In PlatformIO, click the **Alien Icon -\> Project Tasks -\> Platform -\> Upload Filesystem Image**.
 
--How to Generate:
+## 6\. User Guide
 
-    - Go to folder 1_subsetting fonts_ttf_to_ttf.
+  * **Change Text:** Edit `userText` in `src/main.cpp` and upload.
+  * **Change Text via USB:** Open Serial Monitor, type text, press Enter.
+  * **Change Color:** Type `COLOR 255 0 0` in Serial Monitor.
 
-    - Run generate_font.bat (Requires Python & fonttools).
+## 7\. Troubleshooting
 
-    - It generates the subset based on tw_edu_common_4808_chars.txt and basic_latin.
+  * **Text split in middle:** Adjust `bottomHalfOffset = 1` or `-1` in `main.cpp`.
+  * **Red Screen:** Font load failed. Re-run "Upload Filesystem Image".
+  * **Ghosting:** The code uses `HZ_20M` speed. If flickering occurs, lower to `HZ_10M`.
 
+## 8\. The Final Code (`src/main.cpp`)
 
-Option B: Pixel Font (Alternative)
+  * **Text Split in Middle:** Change `bottomHalfOffset` in code (1 or -1).
+  * **Ghosting:** Ensure `mxconfig.i2sspeed` is `HZ_20M`.
+  * **Red Screen:** Font file missing. Upload Filesystem Image.
 
-- File: Cubic_11.ttf (~2.7MB).
- (免費開源的 11×11 中文點陣體 https://github.com/ACh-K/Cubic-11)
-
-- Pros: No subsetting needed (file is naturally small). Sharp edges.
-
-- Cons: Looks "blocky" or low-res.
-
-- How to use: Just rename Cubic_11.ttf to font.ttf.
-
-
-How to Flash the Font to ESP32
-	1. Rename your chosen .ttf file to font.ttf.
-
-	2. Place it inside the data/ folder in your project.
-
-	3. In PlatformIO, click the Alien Icon -> Project Tasks -> Platform -> Upload Filesystem Image.
-
-## 6. User Guide
-
-- Change Text: Edit userText in src/main.cpp and upload.
-
-- Change Text via USB: Open Serial Monitor, type text, press Enter.
-
-- Change Color: Type COLOR 255 0 0 in Serial Monitor.
-
-
-
-
-## 7. Troubleshooting
-
-- Text split in middle: Adjust bottomHalfOffset = 1 or -1 in main.cpp.
-
-- Red Screen: Font load failed. Re-run "Upload Filesystem Image".
-
-- Ghosting: The code uses HZ_20M speed. If flickering occurs, lower to HZ_10M.
-
-
-8. The Final Code (`src/main.cpp`)
-
-- Text Split in Middle: Change bottomHalfOffset in code (1 or -1).
-
-- Ghosting: Ensure mxconfig.i2sspeed is HZ_20M.
-
-- Red Screen: Font file missing. Upload Filesystem Image.
-
-
+<!-- end list -->
 
 ```cpp
 /**
