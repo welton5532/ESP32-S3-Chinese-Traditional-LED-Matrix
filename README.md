@@ -494,6 +494,7 @@ void loop() {
 
 ## Project Structure
 
+```
 MY_LED_PROJECT/
 ├── .pio/
 ├── 1_subsetting fonts_ttf_to_ttf/   <-- YOUR FONT TOOLS FOLDER
@@ -511,3 +512,4 @@ MY_LED_PROJECT/
 ├── platformio.ini
 ├── partitions_custom.csv
 └── README.md                        <-- The Master Manual (Paste code below)
+```
