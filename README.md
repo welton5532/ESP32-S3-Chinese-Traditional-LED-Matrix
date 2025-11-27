@@ -490,15 +490,7 @@ void loop() {
         lastDrawTime = millis();
     }
 }
-```cpp
-
-
-
-
-
-
-
-
+```
 
 ## Project Structure
 
