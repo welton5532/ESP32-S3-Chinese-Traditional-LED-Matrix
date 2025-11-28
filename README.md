@@ -2,6 +2,8 @@
 
 ![IMG_led-matrix-dmeo_20251128](https://github.com/user-attachments/assets/7cdd2f57-c0b2-4cc5-a48e-2ace2171bacd)
 
+https://github.com/user-attachments/assets/081b6dae-b0a2-4cd4-9848-4d3ffebd0bb0
+
 ## 1\. Project Overview
 
 This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chinese text at high frame rates (120FPS+). It uses **Pre-Rendering** (drawing text to memory first) to eliminate flickering and lag.
