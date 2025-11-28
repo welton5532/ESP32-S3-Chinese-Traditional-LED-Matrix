@@ -1,8 +1,6 @@
 # ESP32-S3 High-Speed Traditional Chinese LED Matrix
 
-![ESP32-S3 High-Speed Traditional Chinese LED Matrix demo picture](https://github.com/user-attachments/assets/be5d963b-43cc-4075-b707-14919abcce64)
-
-https://github.com/user-attachments/assets/cccfbd3b-2d34-4b27-a50d-dd5ef6f2da2e
+![IMG_led-matrix-dmeo_20251128](https://github.com/user-attachments/assets/7cdd2f57-c0b2-4cc5-a48e-2ace2171bacd)
 
 ## 1\. Project Overview
 
