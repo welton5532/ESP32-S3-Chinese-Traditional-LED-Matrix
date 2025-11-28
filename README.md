@@ -12,7 +12,9 @@ This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chin
       * *Note:* The "1U" model requires an external WiFi antenna.
   * **Display:** Waveshare **RGB-Matrix-P3-64x64**
       * **Driver IC:** SM16208 or SM5166 (High Refresh Rate).
-      * **Interface:** HUB75.
+      * **Interface:** HUB75E.
+        * HUB75: For panels 32 pixels high (Pin 8 is Ground).
+        * HUB75E: For panels 64 pixels high (Pin 8 is Address E).
   * **Power Supply:** 5V 4A (or higher) DC Adapter.
       * *Connect 5V directly to the panel's power header, not through the ESP32.*
 
