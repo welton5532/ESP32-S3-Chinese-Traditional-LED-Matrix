@@ -1,5 +1,7 @@
 # ESP32-S3 High-Speed Traditional Chinese LED Matrix
 
+https://github.com/user-attachments/assets/cccfbd3b-2d34-4b27-a50d-dd5ef6f2da2e
+
 ## 1\. Project Overview
 
 This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chinese text at high frame rates (120FPS+). It uses **Pre-Rendering** (drawing text to memory first) to eliminate flickering and lag.
