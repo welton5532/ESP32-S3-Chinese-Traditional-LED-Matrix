@@ -22,7 +22,7 @@ This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chin
   * **Power Supply:** 5V 4A (or higher) DC Adapter.
       * *Connect 5V directly to the panel's power header, not through the ESP32.*
 
-## 3\. Wiring Guide (ESP32-S3 to HUB75)
+## 3\. Wiring Guide (ESP32-S3 to HUB75E)
 
 Direct connection (no level shifter needed for this specific board).
 
