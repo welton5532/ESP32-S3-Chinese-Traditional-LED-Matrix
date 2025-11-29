@@ -14,7 +14,7 @@ This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chin
       * **Flash:** 8MB (Quad SPI)
       * **PSRAM:** 8MB (Octal SPI) - *REQUIRED for this code.*
       * *Note:* The "1U" model requires an external WiFi antenna.
-  * **Display:** Waveshare **RGB-Matrix-P3-64x64**
+  * **Display:** Waveshare **RGB-Matrix-P3-64x64** https://www.waveshare.com/rgb-matrix-p3-64x64-f.htm
       * **Driver IC:** SM16208 or SM5166 (High Refresh Rate).
       * **Interface:** HUB75E.
         * HUB75: For panels 32 pixels high (Pin 8 is Ground).
