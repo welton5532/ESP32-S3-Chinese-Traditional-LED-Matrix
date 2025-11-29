@@ -10,10 +10,16 @@ This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chin
 
 ## 2\. Hardware Bill of Materials
 
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/4433a3a7-026a-4b33-831a-5b695251affb" />
+
   * **Microcontroller:** Espressif **ESP32-S3-DevKitC-1U-N8R8**
       * **Flash:** 8MB (Quad SPI)
       * **PSRAM:** 8MB (Octal SPI) - *REQUIRED for this code.*
       * *Note:* The "1U" model requires an external WiFi antenna.
+
+<img width="880" height="660" alt="image" src="https://github.com/user-attachments/assets/3eb034e5-b68e-4ca3-9d18-fa60fe68ba50" />
+<img width="960" height="810" alt="image" src="https://github.com/user-attachments/assets/459ad77e-7f77-4849-8dc3-1dcfb69e8987" />
+
   * **Display:** Waveshare **RGB-Matrix-P3-64x64** https://www.waveshare.com/rgb-matrix-p3-64x64-f.htm
       * **Driver IC:** SM16208 or SM5166 (High Refresh Rate).
       * **Interface:** HUB75E.
