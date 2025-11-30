@@ -14,7 +14,7 @@ This project drives a 64x64 RGB LED Matrix to display scrolling Traditional Chin
 
   * **Microcontroller:** Espressif **ESP32-S3-DevKitC-1U-N8R8**
       * **Flash:** 8MB (Quad SPI)
-      * **PSRAM:** 8MB (Octal SPI) - *REQUIRED for this code.*
+      * **PSRAM:** 8MB (Octal SPI) - *REQUIRED Software Setup.*
       * *Note:* The "1U" model requires an external WiFi antenna.
 
 <img width="880" height="660" alt="image" src="https://github.com/user-attachments/assets/3eb034e5-b68e-4ca3-9d18-fa60fe68ba50" />
