@@ -54,7 +54,7 @@ Direct connection (no level shifter needed for this specific board).
 
 ### A. `platformio.ini` (Project Settings)
 
-You MUST use these settings to enable the 8MB Octal PSRAM.
+MUST use these settings to enable the 8MB Octal PSRAM.
 
 ```ini
 [env:esp32-s3-devkitc-1]
@@ -488,7 +488,7 @@ void loop() {
 ```
 MY_LED_PROJECT/
 ├── .pio/
-├── 1_subsetting fonts_ttf_to_ttf/   <-- YOUR FONT TOOLS FOLDER
+├── 1_subsetting fonts_ttf_to_ttf/   <-- FONT TOOLS FOLDER
 │   ├── basic_latin.txt
 │   ├── Cubic_11.ttf
 │   ├── README.txt
