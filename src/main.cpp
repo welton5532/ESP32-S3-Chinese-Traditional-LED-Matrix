@@ -30,7 +30,7 @@ uint8_t colorG     = 255;
 uint8_t colorB     = 255;
 
 // Rainbow Effect
-bool useRainbow    = false;    // Set 'true' for rainbow, 'false' for solid color
+bool useRainbow    = true;    // Set 'true' for rainbow, 'false' for solid color
 float rainbowScale = 0.5;     // 0.2 = Wide Rainbow, 1.0 = Tight Rainbow
 
 // Scroll Physics
